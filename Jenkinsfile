@@ -32,13 +32,24 @@ pipeline {
 
     }
 
-    stage('deploy') {
+    stage('deploy-apache') {
       agent {
         label 'master'
       }
 
       steps {
         sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangle/all/"
+      }
+
+    }
+
+    stage('deploy-tomcat') {
+      agent {
+        label 'master'
+      }
+
+      steps {
+        sh "scp dist/rectangle_${env.BUILD_NUMBER}.jar jenkins@ec2-54-209-254-199.compute-1.amazonaws.com:/usr/local/tomcat/apache-tomcat-8.0.52/webapps"
       }
 
     }
