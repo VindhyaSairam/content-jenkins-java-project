@@ -56,7 +56,6 @@ pipeline {
 
     stage("Test on Ubuntu") {
       agent {
-	label 'slave1'
         docker 'ubuntu:16.04'
       }
       steps {
