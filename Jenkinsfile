@@ -56,7 +56,10 @@ pipeline {
 
     stage("Test on Ubuntu") {
       agent {
-        docker 'ubuntu:16.04'
+        docker {
+              image 'ubuntu:16.04'
+              label 'docker'
+          }
       }
       steps {
         sh "wget http://ec2-34-205-127-163.compute-1.amazonaws.com/rectangle/all/rectangle_${env.BUILD_NUMBER}.jar"
