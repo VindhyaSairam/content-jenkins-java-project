@@ -62,6 +62,7 @@ pipeline {
           }
       }
       steps {
+        sh -c "apt-get -y install wget"
         sh "wget http://ec2-34-205-127-163.compute-1.amazonaws.com/rectangle/all/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 4"
       }
