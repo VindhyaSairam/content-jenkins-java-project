@@ -49,7 +49,7 @@ pipeline {
       }
 
       steps {
-        sh "wget http://ec2-35-171-187-183.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "wget http://ec2-54-164-142-197.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
       }
     }
@@ -62,7 +62,7 @@ pipeline {
           }
       }
       steps {
-        sh "wget http://ec2-35-171-187-183.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "wget http://ec2-54-164-142-197.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 4"
       }
     }
