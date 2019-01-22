@@ -55,5 +55,18 @@ pipeline {
     
     }
 
+    stage("Test on UbuntuDocker-FT") {
+      agent {
+        docker {
+          image 'myubuntu:latest'
+          label 'docker'
+        }
+      }
+      steps {
+        sh "wget http://ec2-3-88-255-14.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 4"
+      }
+    }
+
   }
 }
