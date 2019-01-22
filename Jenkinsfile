@@ -58,7 +58,7 @@ pipeline {
     stage("Test on UbuntuDocker-FT") {
       agent {
         docker {
-          image 'ubuntu:latest'
+          image 'myubuntu:latest'
           label 'docker'
         }
       }
