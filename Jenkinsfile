@@ -38,22 +38,34 @@ pipeline {
       }
 
       steps {
-        sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangle"
+        sh "scp dist/rectangle_${env.BUILD_NUMBER}.jar jenkins@ec2-3-86-115-138.compute-1.amazonaws.com:/var/www/html/rectangle"
       }
 
     }
 
     stage('FT-test on slave') {
       agent {
-        label 'tomcat'
+        label 'apache'
       }
 
       steps {
-        sh "wget http://ec2-18-212-36-246.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "wget http://localhost/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
       }
     }
 
+    stage("FT-Test on Centos") {
+      agent {
+        docker {
+              image 'mycentos:latest'
+              label 'docker'
+          }
+      }
+      steps {
+        sh "wget http://ec2-3-86-115-138.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 2 4"
+      }
+    }
 
   }
 }
