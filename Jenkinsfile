@@ -31,5 +31,16 @@ pipeline {
 
     }  
 
+    stage('deploy-apache') {
+      agent {
+        label 'master'
+      }
+
+      steps {
+        sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangle"
+      }
+
+    }
+
   }
 }
