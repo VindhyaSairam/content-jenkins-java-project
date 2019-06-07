@@ -37,18 +37,17 @@ pipeline {
       }
 
       steps {
-        sh "cp dist/rectangle_${env.BUILD_NUMBER}.jar /var/www/html/rectangle"
+		sh "scp dist/rectangle_${env.BUILD_NUMBER}.jar jenkins@ec2-3-87-32-39.compute-1.amazonaws.com:/var/www/html/rectangle"
       }
-
     }
 
     stage('FT-test on slave') {
       agent {
-        label 'master'
+        label 'apache'
       }
 
       steps {
-        sh "wget http://ec2-52-203-30-86.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "wget http://localhost/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
         sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
       }
     }
