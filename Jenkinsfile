@@ -42,5 +42,16 @@ pipeline {
 
     }
 
+    stage('FT-test on slave') {
+      agent {
+        label 'apache'
+      }
+
+      steps {
+        sh "wget http://ec2-52-203-30-86.compute-1.amazonaws.com/rectangle/rectangle_${env.BUILD_NUMBER}.jar"
+        sh "java -jar rectangle_${env.BUILD_NUMBER}.jar 5 6"
+      }
+    }
+
   }
 }
