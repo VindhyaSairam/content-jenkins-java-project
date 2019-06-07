@@ -44,7 +44,7 @@ pipeline {
 
     stage('FT-test on slave') {
       agent {
-        label 'apache'
+        label 'master'
       }
 
       steps {
